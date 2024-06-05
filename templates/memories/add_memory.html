@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Add a Memory{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-6">Add a New Memory</h1>
+        <form id="memoryForm" method="post" class="max-w-lg mx-auto bg-white p-6 rounded shadow" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="place_name" class="block text-gray-700">Place Name:</label>
+                <input type="text" id="place_name" name="place_name" required class="input input-bordered w-full">
+            </div>
+            <div class="mb-4">
+                <label for="comments" class="block text-gray-700">Comments:</label>
+                <textarea id="comments" name="comments" required class="textarea textarea-bordered w-full"></textarea>
+            </div>
+            <div id="map" class="w-full h-96 mb-4"></div>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <button type="submit" class="btn btn-primary w-full">Save</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap" async defer></script>
+<script>
+    let map;
+    let marker;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 10.8231, lng: 106.6297 },
+            zoom: 8
+        });
+
+        map.addListener('click', (e) => {
+            placeMarker(e.latLng, map);
+        });
+    }
+
+    function placeMarker(position, map) {
+        if (marker) {
+            marker.setPosition(position);
+        } else {
+            marker = new google.maps.Marker({
+                position: position,
+                map: map
+            });
+        }
+        document.getElementById('latitude').value = position.lat();
+        document.getElementById('longitude').value = position.lng();
+    }
+
+    function validateForm() {
+        const latitude = document.getElementById('latitude').value;
+        const longitude = document.getElementById('longitude').value;
+        if (!latitude || !longitude) {
+            alert('Please select a location on the map.');
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock %}
