@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}My Memories{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold">Hello, {{ user.username }}</h1>
+            {% if avatar_url %}
+                <img src="{{ avatar_url }}" alt="{{ user.username }}" class="rounded-full mx-auto mt-4">
+            {% endif %}
+            <p class="text-lg mt-2">You have {{ memories.count }} memories.</p>
+            <a href="{% url 'add_memory' %}" class="btn btn-primary mt-4">Add a Memory</a>
+            <a href="{% url 'account_logout' %}" class="btn btn-red mt-4">Logout</a>
+        </div>
+        <div class="memories-list">
+            <h2 class="text-2xl font-bold mb-4">Your Memories</h2>
+            <ul>
+                {% for memory in memories %}
+                    <li class="mb-4 p-4 bg-white rounded shadow">
+                        <h3 class="text-xl font-bold">{{ memory.place_name }}</h3>
+                        <p>{{ memory.comments }}</p>
+                        <p class="text-sm text-gray-500">Latitude: {{ memory.latitude }}, Longitude: {{ memory.longitude }}</p>
+                        <p class="text-sm text-gray-500">Created at: {{ memory.created_at }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
