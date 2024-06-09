@@ -12,10 +12,12 @@
             {% endif %}
             <p class="text-lg mt-2">You have {{ memories.count }} memories.</p>
             <a href="{% url 'add_memory' %}" class="btn btn-primary mt-4">Add a Memory</a>
-            <a href="{% url 'account_logout' %}" class="btn btn-red mt-4">Logout</a>
+            <a href="{% url 'logout' %}" class="btn btn-red mt-4">Logout</a>
         </div>
         <div class="memories-list">
-            <h2 class="text-2xl font-bold mb-4">Your Memories</h2>
+            {% if memories.count > 0 %}
+                <h2 class="text-2xl font-bold mb-4">Your Memories</h2>
+            {% endif %}
             <ul>
                 {% for memory in memories %}
                     <li class="mb-4 p-4 bg-white rounded shadow">
@@ -27,7 +29,6 @@
                 {% endfor %}
             </ul>
         </div>
-
     </div>
 </div>
 {% endblock %}
