@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Welcome{% endblock %}
 
@@ -7,7 +7,7 @@
     <div class="max-w-md w-full space-y-8">
         <div class="text-center">
             <h1 class="text-4xl font-bold">Welcome to Places Remember</h1>
-            <a href="{% url 'account_login' %}" class="btn btn-primary mt-4">Login with Google</a>
+            <a href="{% url 'login' %}" class="btn btn-primary mt-4">Login with Google</a>
         </div>
     </div>
 </div>

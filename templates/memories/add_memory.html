@@ -49,13 +49,14 @@
                 map: map
             });
         }
-        document.getElementById('latitude').value = position.lat();
-        document.getElementById('longitude').value = position.lng();
+        document.getElementById('latitude').value = position.lat().toFixed(6);
+        document.getElementById('longitude').value = position.lng().toFixed(6);
     }
 
     function validateForm() {
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
+        console.log(latitude, longitude)
         if (!latitude || !longitude) {
             alert('Please select a location on the map.');
             return false;
