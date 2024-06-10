@@ -88,7 +88,13 @@ The Places Remember App is a web application that allows users to save and view 
 8. Build Tailwind CSS:
 
     ```shell
-    npm run build:css
+    npm run build
+    ```
+
+9. Build and Collect Static Files:
+
+    ```shell
+    python manage.py collectstatic --noinput
     ```
 
 ## Configuration
