@@ -37,7 +37,6 @@ yarn-debug.log
 
 # Tailwind CSS and DaisyUI
 /static
-/src
 /staticfiles
 
 # VS Code
@@ -50,3 +49,4 @@ yarn-debug.log
 # Other
 *.swp
 *.swo
+.vercel

@@ -98,11 +98,16 @@ def add_memory(request):
             memory.user = request.user
             memory.latitude = round(memory.latitude, 6)
             memory.longitude = round(memory.longitude, 6)
-            print("Location: ", memory.latitude, memory.longitude)
             memory.save()
             return redirect("home")
         else:
             print("Error:", form.errors)
     else:
         form = MemoryForm()
-    return render(request, "memories/add_memory.html", {"form": form})
+
+    context = {
+        "form": form,
+        "google_maps_api_key": settings.GOOGLE_MAPS_API_KEY,
+    }
+
+    return render(request, "memories/add_memory.html", context)
