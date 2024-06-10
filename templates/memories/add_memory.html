@@ -23,8 +23,9 @@
         </form>
     </div>
 </div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap" async defer></script>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&loading=async&callback=initMap">
+    </script>
 <script>
     let map;
     let marker;
